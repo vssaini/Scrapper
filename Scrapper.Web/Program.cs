@@ -1,18 +1,18 @@
 using Scrapper.Application;
 using Scrapper.Infrastructure;
+using Scrapper.Web.Extensions;
+using Scrapper.Web.Helpers;
+using Scrapper.Web.Models;
 using Serilog;
 using Serilog.Debugging;
 using System.Diagnostics;
-using Scrapper.Web.Extensions;
-
-const string appName = "Scrapper";
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.AzureApp()
     .CreateBootstrapLogger();
 
-Log.Information("Starting application {ApplicationName}", appName);
+Log.Information("Starting application {ApplicationName}", WebConstants.AppName);
 
 try
 {
@@ -29,25 +29,29 @@ try
 
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline.
     if (!app.Environment.IsDevelopment())
     {
         app.UseExceptionHandler("/Home/Error");
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
     }
 
-    app.UseSerilogRequestLogging();
     app.UseHttpsRedirection();
     app.UseStaticFiles();
 
+    app.UseSerilogRequestLogging();
+
     app.UseRouting();
 
+    app.UseSession();
+    app.UseCookiePolicy();
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    Utilities.SetAppCulture();
 
     app.Run();
 }

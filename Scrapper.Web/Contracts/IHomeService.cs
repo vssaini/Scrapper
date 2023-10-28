@@ -5,5 +5,5 @@ namespace Scrapper.Web.Contracts;
 
 public interface IHomeService
 {
-    Task<PageResult<ScrapeResponse>> GetScrapesAsync(SearchRequest searchRequest);
+    Task<PageResult<ScrapeResponse>> GetScrapesAsync(SearchRequest? searchRequest);
 }

@@ -27,7 +27,7 @@ internal sealed class ScrapeRepository : IScrapeRepository
         var dParams = new DynamicParameters();
         dParams.Add("@StartDate", filter.DateRange.Start);
         dParams.Add("@EndDate", filter.DateRange.End);
-        dParams.Add("@AccountNumber", filter.AccountNumber);
+        dParams.Add("@ProductId", string.Empty);
         dParams.Add("@SortOrder", sort.SortOrder);
         dParams.Add("@SortMethod", sort.SortMethod);
         dParams.Add("@PageNumber", page.PageNumber);
@@ -38,14 +38,14 @@ internal sealed class ScrapeRepository : IScrapeRepository
 
     private async Task<PageResult<ScrapeResponse>> SearchScrapesAsync(SqlMapper.IDynamicParameters dParams, Pagination page)
     {
-        var royalties = await GetScrapesFromDbAsync(dParams);
+        var scrapes = await GetScrapesFromDbAsync(dParams);
 
         return new PageResult<ScrapeResponse>
         {
-            Items = royalties,
+            Items = scrapes,
             Page = page.PageNumber,
             PageSize = page.PageSize,
-            TotalItems = royalties.Count > 0 ? royalties.Select(x => x.TotalRows).First() : 0
+            TotalItems = scrapes.Count > 0 ? scrapes.Select(x => x.TotalRows).First() : 0
         };
     }
 

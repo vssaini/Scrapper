@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
+using Scrapper.Web.Contracts;
 using Scrapper.Web.Models;
+using Scrapper.Web.Services;
 
 namespace Scrapper.Web.Extensions;
 
@@ -9,7 +11,30 @@ public static class DependencyInjection
     public static void AddDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         services.BindSettings(configuration);
+
+        services.ConfigureSession();
+        services.ConfigureDependencies();
         services.ConfigureAuthentication();
+    }
+
+    private static void BindSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<Models.Settings.Firebase>(options => configuration.GetSection(WebConstants.FirebaseSectionName).Bind(options));
+    }
+
+    private static void ConfigureSession(this IServiceCollection services)
+    {
+        services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromSeconds(10);
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
+    }
+
+    private static void ConfigureDependencies(this IServiceCollection services)
+    {
+        services.AddScoped<IHomeService, HomeService>();
     }
 
     private static void ConfigureAuthentication(this IServiceCollection services)
@@ -34,10 +59,5 @@ public static class DependencyInjection
             //options.Secure = _environment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
             options.Secure = CookieSecurePolicy.Always;
         });
-    }
-
-    private static void BindSettings(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.Configure<Models.Settings.Firebase>(options => configuration.GetSection(WebConstants.FirebaseSectionName).Bind(options));
     }
 }

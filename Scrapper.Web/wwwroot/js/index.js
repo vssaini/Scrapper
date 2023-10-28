@@ -63,20 +63,20 @@ var home = function () {
 
         getSearchRequest = function (pageNumber, pageSize) {
 
-           const searchRequest = {
-               IsForeignStatement: isForeignStatement,
-               DateRange: {
-                   Start: startDate.format('YYYY-MM-DD'),
-                   End: endDate.format('YYYY-MM-DD')
-               },
-               AccountNumber: $('#accountNumber').val(),
-               Pagination: {
-                   PageNumber: pageNumber,
-                   PageSize: pageSize
-               }
-           }
+            const searchRequest = {
+                IsForeignStatement: isForeignStatement,
+                DateRange: {
+                    Start: startDate.format('YYYY-MM-DD'),
+                    End: endDate.format('YYYY-MM-DD')
+                },
+                AccountNumber: $('#accountNumber').val(),
+                Pagination: {
+                    PageNumber: pageNumber,
+                    PageSize: pageSize
+                }
+            }
 
-           return searchRequest;
+            return searchRequest;
         },
 
         callSearchApi = function (pageNumber, pageSize) {
@@ -90,7 +90,7 @@ var home = function () {
 
             const successCallback = (response) => {
 
-                $('#royalties').html(response);
+                $('#scrapes').html(response);
                 changeSearchStatus(false, $('#btnSearch'));
             }
 
@@ -98,14 +98,14 @@ var home = function () {
                 console.error(jqXhr);
 
                 const errorMsg = formatErrorMessage(jqXhr, error);
-                const msg = errorMsg ? errorMsg : `Error occurred while searching royalties.`;
+                const msg = errorMsg ? errorMsg : `Error occurred while searching scrapes.`;
                 showMessage(msg, 'error');
 
                 changeSearchStatus(false, $('#btnSearch'));
             };
 
             const searchRequest = getSearchRequest(pageNumber, pageSize);
-            ajaxCall('POST', `/${controller}/SearchRoyalties`, successCallback, errorCallback, searchRequest, null, 'html');
+            ajaxCall('POST', `/${controller}/SearchScrapes`, successCallback, errorCallback, searchRequest, null, 'html');
         },
 
         callSearchApiWithDefaultOptions = function (pageNumber, pageSize) {
@@ -114,7 +114,7 @@ var home = function () {
 
             const successCallback = (response) => {
 
-                $('#royalties').html(response);
+                $('#scrapes').html(response);
                 changeSearchStatus(false, $('#btnSearch'));
             }
 
@@ -122,7 +122,7 @@ var home = function () {
                 console.error(jqXhr);
 
                 const errorMsg = formatErrorMessage(jqXhr, error);
-                const msg = errorMsg ? errorMsg : `Error occurred while searching royalties.`;
+                const msg = errorMsg ? errorMsg : `Error occurred while searching scrapes.`;
                 showMessage(msg, 'error');
 
                 changeSearchStatus(false, $('#btnSearch'));
@@ -141,11 +141,11 @@ var home = function () {
                 }
             }
 
-            const url = `/${controller}/SearchRoyalties`;
+            const url = `/${controller}/SearchScrapes`;
             ajaxCall('POST', url, successCallback, errorCallback, searchRequest, null, 'html');
         },
 
-        searchRoyalties = function () {
+        searchScrapes = function () {
 
             isDefaultSearch = false;
             callSearchApi(1, 10);
@@ -186,22 +186,6 @@ var home = function () {
                 });
         },
 
-        downloadPdf = function () {
-
-            const isValid = validateRangeAndAccountNumber();
-            if (!isValid) {
-                return false;
-            }
-
-            const req = getSearchRequest();
-
-            const url = `/${controller}/DownloadPdf?IsForeignStatement=${req.IsForeignStatement}&DateRange.Start=${req.DateRange.Start}&DateRange.End=${req.DateRange.End}&AccountNumber=${req.AccountNumber}`;
-            console.log(`Downloading PDF from URL - ${url}`);
-
-            window.location.href = url;
-            return false;
-        },
-
         bindToggleEventHandler = function () {
 
             var chkToggle = document.querySelector('#chkToggle');
@@ -228,7 +212,6 @@ var home = function () {
 
     return {
         init: init,
-        searchRoyalties: searchRoyalties,
-        downloadPdf: downloadPdf
+        searchScrapes: searchScrapes
     };
 }();

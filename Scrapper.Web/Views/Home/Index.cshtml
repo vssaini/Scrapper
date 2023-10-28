@@ -5,11 +5,11 @@
 }
 
 <div class="row">
-    <!--Royalties start-->
+    <!--Scrapes start-->
     <div class="col-xl-12 col-md-12">
         <div class="card Recent-Users">
             <div class="card-header">
-                <h5>Royalties</h5>
+                <h5>Scrapes</h5>
             </div>
 
             <div class="card-block ">
@@ -53,7 +53,7 @@
 
                     </div>
                     <div class="col-sm-4 search">
-                        <button class="btn btn-primary" id="btnSearch" onclick="home.searchRoyalties(this);"><span class="loader-border loader-border-sm d-none" role="status" aria-hidden="true"></span> <span>Search</span></button>
+                        <button class="btn btn-primary" id="btnSearch" onclick="home.searchScrapes(this);"><span class="loader-border loader-border-sm d-none" role="status" aria-hidden="true"></span> <span>Search</span></button>
 
                         <a href="#" onclick="home.downloadPdf()" class="btn btn-secondary">Download PDF <i class="feather icon-download mr-0"></i></a>
                     </div>
@@ -62,7 +62,7 @@
 
                 @if (Model.Items.Count > 0)
                 {
-                    <div id="royalties">
+                    <div id="scrapes">
                         @await Html.PartialAsync("_Scrapes", Model)
                     </div>
                 }
@@ -73,7 +73,7 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-6">
                         <div class="alert alert-warning text-center" role="alert">
-                            No royalties available.
+                            No scrapes available.
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
 
         </div>
     </div>
-    <!--Royalties end-->
+    <!--Scrapes end-->
 </div>
 
 @section scripts{
@@ -96,4 +96,4 @@
         });
     </script>
 
-        }
+}

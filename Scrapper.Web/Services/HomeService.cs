@@ -1,33 +1,31 @@
-﻿using Scrapper.Domain.Abstractions;
+﻿using MediatR;
+using Scrapper.Application.Scrapes.SearchScrapes;
+using Scrapper.Domain.Abstractions;
 using Scrapper.Domain.Scrapes;
 using Scrapper.Web.Contracts;
-using System.Text.Json;
 
 namespace Scrapper.Web.Services;
 
 public class HomeService : IHomeService
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ISender _sender;
 
-    public HomeService(IHttpClientFactory httpClientFactory)
+    public HomeService(ISender sender)
     {
-        _httpClientFactory = httpClientFactory;
+        _sender = sender;
     }
 
-    public async Task<PageResult<ScrapeResponse>> GetScrapesAsync(SearchRequest searchRequest)
+    public async Task<PageResult<ScrapeResponse>> GetScrapesAsync(SearchRequest? request)
     {
-        searchRequest ??= GetDefaultSearchRequest();
+        request ??= GetDefaultSearchRequest();
 
-        const string path = "api/royalties";
-        var httpClient = _httpClientFactory.CreateClient(""); // TODO: Get rid of such code
+        var filter = new SearchFilter(request.DateRange, request.AccountNumber);
+        var query = new SearchScrapesQuery(filter,
+            new Pagination(request.Pagination.PageNumber, request.Pagination.PageSize),
+            new Sort("Id", "ASC"));
 
-        var json = JsonSerializer.Serialize(searchRequest);
-        var content = new StringContent(json, null, "application/json");
-
-        HttpResponseMessage response = await httpClient.PostAsync(path, content);
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<PageResult<ScrapeResponse>>();
+        var pageResult = await _sender.Send(query);
+        return pageResult;
     }
 
     private static SearchRequest GetDefaultSearchRequest()
