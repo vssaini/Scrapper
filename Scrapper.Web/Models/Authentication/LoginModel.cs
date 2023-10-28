@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Scrapper.Models.Authentication;
+namespace Scrapper.Web.Models.Authentication;
 
 public sealed class LoginModel
 {

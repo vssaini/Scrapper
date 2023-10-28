@@ -1,4 +1,4 @@
-﻿namespace Scrapper.Domain.Royalties;
+﻿namespace Scrapper.Domain.Scrapes;
 
 public record ScrapeId(Guid Value)
 {

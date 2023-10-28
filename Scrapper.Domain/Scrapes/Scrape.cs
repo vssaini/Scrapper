@@ -1,6 +1,6 @@
 ﻿using Scrapper.Domain.Abstractions;
 
-namespace Scrapper.Domain.Royalties
+namespace Scrapper.Domain.Scrapes
 {
     public sealed class Scrape : Entity<ScrapeId>
     {

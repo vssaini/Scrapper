@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Scrapper.Application.Abstractions.Logger;
-using Scrapper.Models;
-using Scrapper.Models.Authentication;
 using System.Security.Claims;
+using Scrapper.Web.Models;
+using Scrapper.Web.Models.Authentication;
 
 namespace Scrapper.Web.Controllers
 {
@@ -17,7 +17,7 @@ namespace Scrapper.Web.Controllers
         private readonly ILogService _logService;
         private readonly FirebaseAuthProvider _fbAuth;
 
-        public AccountController(ILogService logService, IOptions<Scrapper.Models.Settings.Firebase> firebase)
+        public AccountController(ILogService logService, IOptions<Models.Settings.Firebase> firebase)
         {
             _logService = logService;
 

@@ -1,3 +1,3 @@
-﻿namespace Scrapper.Domain.Royalties;
+﻿namespace Scrapper.Domain.Scrapes;
 
 public record SearchFilter(DateRange DateRange, int AccountNumber);

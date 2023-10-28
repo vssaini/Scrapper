@@ -1,5 +1,5 @@
 ﻿using Scrapper.Domain.Abstractions;
-using Scrapper.Domain.Royalties;
+using Scrapper.Domain.Scrapes;
 
 namespace Scrapper.Web.Contracts;
 

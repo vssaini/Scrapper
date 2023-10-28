@@ -1,10 +1,9 @@
 ﻿using Scrapper.Domain.Abstractions;
-using Scrapper.Domain.Royalties;
-using Scrapper.Models;
+using Scrapper.Domain.Scrapes;
 using Scrapper.Web.Contracts;
 using System.Text.Json;
 
-namespace UMG.Web.Services;
+namespace Scrapper.Web.Services;
 
 public class HomeService : IHomeService
 {
@@ -20,7 +19,7 @@ public class HomeService : IHomeService
         searchRequest ??= GetDefaultSearchRequest();
 
         const string path = "api/royalties";
-        var httpClient = _httpClientFactory.CreateClient(Constants.ApiClientName);
+        var httpClient = _httpClientFactory.CreateClient(""); // TODO: Get rid of such code
 
         var json = JsonSerializer.Serialize(searchRequest);
         var content = new StringContent(json, null, "application/json");

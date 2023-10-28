@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Scrapper.Application.Scrapes.SearchRoyalties;
+namespace Scrapper.Application.Scrapes.SearchScrapes;
 
 public class SearchScrapesQueryValidator : AbstractValidator<SearchScrapesQuery>
 {

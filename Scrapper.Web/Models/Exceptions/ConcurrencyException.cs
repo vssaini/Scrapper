@@ -1,4 +1,4 @@
-﻿namespace Scrapper.Models.Exceptions;
+﻿namespace Scrapper.Web.Models.Exceptions;
 
 public sealed class ConcurrencyException : Exception
 {

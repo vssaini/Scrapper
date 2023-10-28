@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Scrapper.Domain.Abstractions;
-using Scrapper.Domain.Royalties;
 using System.Data;
+using Scrapper.Domain.Scrapes;
 
 namespace Scrapper.Infrastructure.Repositories;
 

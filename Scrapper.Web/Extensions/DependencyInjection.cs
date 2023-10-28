@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
-using Scrapper.Models;
+using Scrapper.Web.Models;
 
 namespace Scrapper.Web.Extensions;
 
@@ -38,6 +38,6 @@ public static class DependencyInjection
 
     private static void BindSettings(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<Scrapper.Models.Settings.Firebase>(options => configuration.GetSection(WebConstants.FirebaseSectionName).Bind(options));
+        services.Configure<Models.Settings.Firebase>(options => configuration.GetSection(WebConstants.FirebaseSectionName).Bind(options));
     }
 }

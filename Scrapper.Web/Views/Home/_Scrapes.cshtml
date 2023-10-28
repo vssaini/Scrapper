@@ -1,5 +1,4 @@
-﻿@using Scrapper.Models
-@model Scrapper.Domain.Abstractions.PageResult<Scrapper.Domain.Royalties.ScrapeResponse>
+﻿@model Scrapper.Domain.Abstractions.PageResult<Scrapper.Domain.Scrapes.ScrapeResponse>
 
 @{
     var paginationVm = new PaginationVm(Model.TotalItems, Model.Page, Model.TotalPages, Model.PageSize);

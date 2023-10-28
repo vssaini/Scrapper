@@ -7,7 +7,7 @@ using Scrapper.Application.Abstractions.Data;
 using Scrapper.Application.Abstractions.Email;
 using Scrapper.Application.Abstractions.Logger;
 using Scrapper.Domain.Abstractions;
-using Scrapper.Domain.Royalties;
+using Scrapper.Domain.Scrapes;
 using Scrapper.Infrastructure.Clock;
 using Scrapper.Infrastructure.Data;
 using Scrapper.Infrastructure.Email;
@@ -34,7 +34,7 @@ public static class DependencyInjection
 
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
-        var conString = configuration.GetConnectionString("UmgConString") ?? throw new ArgumentNullException(nameof(configuration));
+        var conString = configuration.GetConnectionString("ScrapperConString") ?? throw new ArgumentNullException(nameof(configuration));
 
         Log.Warning("Using connection string {ConnectionString}", conString);
 

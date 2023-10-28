@@ -1,4 +1,4 @@
-﻿namespace Scrapper.Models;
+﻿namespace Scrapper.Web.Models;
 
 public class Result<T>
 {

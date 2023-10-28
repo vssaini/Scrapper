@@ -1,6 +1,4 @@
 ﻿@{
-    const string appName = "Scrapper";
-
     var userName = User.Identity?.Name ?? "NA";
 }
 
@@ -8,7 +6,7 @@
 <html lang="en">
 
 <head>
-    <title>@ViewData["Title"] - @appName</title>
+    <title>@ViewData["Title"] - @WebConstants.AppName</title>
     <partial name="_Header" />
 </head>
 
@@ -28,7 +26,7 @@
                     <div class="b-bg">
                         <i class="feather icon-pie-chart"></i>
                     </div>
-                    <span class="b-title">@appName</span>
+                    <span class="b-title">@WebConstants.AppName</span>
                 </a>
                 <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
             </div>
@@ -53,7 +51,7 @@
                 <div class="b-bg">
                     <i class="feather icon-trending-up"></i>
                 </div>
-                <span class="b-title">@appName</span>
+                <span class="b-title">@WebConstants.AppName</span>
             </a>
         </div>
         <a class="mobile-menu" id="mobile-header" href="javascript:">

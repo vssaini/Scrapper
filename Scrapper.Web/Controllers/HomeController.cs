@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Scrapper.Domain.Abstractions;
-using Scrapper.Domain.Royalties;
-using Scrapper.Models;
 using System.Diagnostics;
+using Scrapper.Domain.Scrapes;
+using Scrapper.Web.Models;
 
 namespace Scrapper.Web.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace Scrapper.Models.Settings;
+﻿namespace Scrapper.Web.Models.Settings;
 
 public class Firebase
 {
