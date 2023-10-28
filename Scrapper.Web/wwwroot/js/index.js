@@ -1,7 +1,6 @@
 ﻿var controller = 'Home';
 var isDefaultSearch = true;
 
-var isForeignStatement = true;
 var startDate = moment();
 var endDate = moment();
 
@@ -20,41 +19,27 @@ var home = function () {
         }
     },
 
-        validateRangeAndAccountNumber = function () {
+        validateDateRangeAndProductId = function () {
 
-            if (isForeignStatement) {
-                const fsStartRange = $('#fsStartRange').val();
-                const fsEndRange = $('#fsEndRange').val();
+            const startRange = $('#startRange').val();
+            const endRange = $('#endRange').val();
 
-                if (fsStartRange.length === 0 || fsEndRange.length === 0) {
-                    showMessage('Please enter start and end range in A00 or B00 format.', 'warning');
-                    return false;
-                }
-
-                startDate = moment(fsStartRange);
-                endDate = moment(fsEndRange);
-
-            } else {
-                const startRange = $('#startRange').val();
-                const endRange = $('#endRange').val();
-
-                if (startRange.length === 0 || endRange.length === 0) {
-                    showMessage('Please enter both start and end date.', 'warning');
-                    return false;
-                }
-
-                startDate = moment(startRange);
-                endDate = moment(endRange);
+            if (startRange.length === 0 || endRange.length === 0) {
+                showMessage('Please enter both start and end date.', 'warning');
+                return false;
             }
+
+            startDate = moment(startRange);
+            endDate = moment(endRange);
 
             if (startDate.isAfter(endDate)) {
                 showMessage('Start date cannot be greater than end date.', 'warning');
                 return false;
             }
 
-            const accountNumber = $('#accountNumber').val();
-            if (accountNumber.length === 0) {
-                showMessage('Please enter account number.', 'warning');
+            const productId = $('#productId').val();
+            if (productId.length === 0) {
+                showMessage('Please enter product id.', 'warning');
                 return false;
             }
 
@@ -64,12 +49,11 @@ var home = function () {
         getSearchRequest = function (pageNumber, pageSize) {
 
             const searchRequest = {
-                IsForeignStatement: isForeignStatement,
                 DateRange: {
                     Start: startDate.format('YYYY-MM-DD'),
                     End: endDate.format('YYYY-MM-DD')
                 },
-                AccountNumber: $('#accountNumber').val(),
+                ProductId: $('#productId').val(),
                 Pagination: {
                     PageNumber: pageNumber,
                     PageSize: pageSize
@@ -81,7 +65,7 @@ var home = function () {
 
         callSearchApi = function (pageNumber, pageSize) {
 
-            const isValid = validateRangeAndAccountNumber();
+            const isValid = validateDateRangeAndProductId();
             if (!isValid) {
                 return;
             }
@@ -129,12 +113,11 @@ var home = function () {
             };
 
             const searchRequest = {
-                IsForeignStatement: isForeignStatement,
                 DateRange: {
-                    Start: moment([1753, 1, 1]),
-                    End: moment()
+                    Start: moment([1753, 1, 1]).format('YYYY-MM-DD'),
+                    End: moment().format('YYYY-MM-DD')
                 },
-                AccountNumber: 0,
+                ProductId: $('#productId').val(),
                 Pagination: {
                     PageNumber: pageNumber,
                     PageSize: pageSize
@@ -185,29 +168,10 @@ var home = function () {
                         callSearchApi(pageNumber, 10);
                 });
         },
-
-        bindToggleEventHandler = function () {
-
-            var chkToggle = document.querySelector('#chkToggle');
-
-            chkToggle.addEventListener('change', function () {
-
-                isForeignStatement = chkToggle.checked;
-
-                if (isForeignStatement) {
-                    $('#foreignStatement').removeClass('d-none');
-                    $('#session').addClass('d-none');
-                } else {
-                    $('#foreignStatement').addClass('d-none');
-                    $('#session').removeClass('d-none');
-                }
-            });
-        },
-
+        
         init = function () {
 
             changePage();
-            bindToggleEventHandler();
         };
 
     return {

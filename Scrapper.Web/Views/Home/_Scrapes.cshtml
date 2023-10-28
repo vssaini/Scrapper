@@ -9,12 +9,11 @@
         <thead>
             <tr>
                 <th><a>Id</a></th>
-                <th><a>Frek Number</a></th>
-                <th><a>Account Number</a></th>
-                <th><a>Statement Cycle</a></th>
-                <th><a>Artist</a></th>
-                <th><a>From Date</a></th>
-                <th><a>To Date</a></th>
+                <th><a>Batch</a></th>
+                <th><a>Batch Date</a></th>
+                <th><a>Product Id</a></th>
+                <th><a>Product Name</a></th>
+                <th><a>Product Price</a></th>
             </tr>
         </thead>
 
@@ -23,12 +22,11 @@
             {
                 <tr>
                     <td>@item.Id</td>
-                    <td>@item.Frekno</td>
-                    <td>@item.AccountNumber</td>
-                    <td>@item.StmtCycle</td>
-                    <td>@item.Artist</td>
-                    <td>@item.FromDate.ToString("MM-dd-yyyy")</td>
-                    <td>@item.ToDate.ToString("MM-dd-yyyy")</td>
+                    <td>@item.Batch</td>
+                    <td>@item.BatchDate.ToString(WebConstants.DateFormatForViews)</td>
+                    <td>@item.ProductId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.ProductPrice</td>
                 </tr>
             }
 

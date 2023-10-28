@@ -27,7 +27,7 @@ internal sealed class ScrapeRepository : IScrapeRepository
         var dParams = new DynamicParameters();
         dParams.Add("@StartDate", filter.DateRange.Start);
         dParams.Add("@EndDate", filter.DateRange.End);
-        dParams.Add("@ProductId", string.Empty);
+        dParams.Add("@ProductId", filter.ProductId);
         dParams.Add("@SortOrder", sort.SortOrder);
         dParams.Add("@SortMethod", sort.SortMethod);
         dParams.Add("@PageNumber", page.PageNumber);
@@ -56,9 +56,7 @@ internal sealed class ScrapeRepository : IScrapeRepository
 
         await using var connection = _dbContext.Database.GetDbConnection();
 
-        await using var gr = await connection.QueryMultipleAsync(command);
-        var scrapes = gr.Read<ScrapeResponse>().ToList();
-
-        return scrapes;
+        var response = await connection.QueryAsync<ScrapeResponse>(command);
+        return response.ToList();
     }
 }

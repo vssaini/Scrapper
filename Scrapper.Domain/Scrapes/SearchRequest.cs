@@ -1,3 +1,3 @@
 ﻿namespace Scrapper.Domain.Scrapes;
 
-public record SearchRequest(bool IsForeignStatement, DateRange DateRange, int AccountNumber, Pagination Pagination);
+public record SearchRequest(DateRange DateRange, string ProductId, Pagination Pagination);

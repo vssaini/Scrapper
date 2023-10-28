@@ -19,7 +19,7 @@ public class HomeService : IHomeService
     {
         request ??= GetDefaultSearchRequest();
 
-        var filter = new SearchFilter(request.DateRange, request.AccountNumber);
+        var filter = new SearchFilter(request.DateRange, request.ProductId);
         var query = new SearchScrapesQuery(filter,
             new Pagination(request.Pagination.PageNumber, request.Pagination.PageSize),
             new Sort("Id", "ASC"));
@@ -34,6 +34,6 @@ public class HomeService : IHomeService
         var minStartDate = new DateTime(1753, 1, 1);
 
         var dateRange = new DateRange(minStartDate, DateTime.Now);
-        return new SearchRequest(true, dateRange, 0, new Pagination(1, 10));
+        return new SearchRequest(dateRange, null, new Pagination(1, 10));
     }
 }

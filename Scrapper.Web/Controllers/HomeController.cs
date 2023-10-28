@@ -37,13 +37,11 @@ namespace Scrapper.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchScrapes(SearchRequest request)
+        public async Task<IActionResult> SearchScrapes([FromBody] SearchRequest request)
         {
             var pageResult = new PageResult<ScrapeResponse>();
 
-            var rangeTxt = request.IsForeignStatement ? "Foreign Statement" : "Session";
-
-            _logger.LogInformation("Searching scrapes for account {AccountNumber} via {RangeFilter} filter. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.AccountNumber, rangeTxt, request.DateRange.Start, request.DateRange.End, request.Pagination.PageNumber, request.Pagination.PageSize);
+            _logger.LogInformation("Searching scrapes for product {ProductId}. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.ProductId, request.DateRange.Start, request.DateRange.End, request.Pagination.PageNumber, request.Pagination.PageSize);
 
             try
             {
@@ -54,7 +52,7 @@ namespace Scrapper.Web.Controllers
                 _logger.LogError(e, "Error while searching scrapes.");
             }
 
-            return Ok(pageResult);
+            return PartialView("_Scrapes", pageResult);
         }
 
         [AllowAnonymous]
