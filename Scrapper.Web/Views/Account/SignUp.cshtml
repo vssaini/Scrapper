@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Scrapper.Models.Authentication.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sign Up - UMG Royalty</title>
+    <partial name="_Header" />
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="feather icon-user-plus auth-icon"></i>
+                    </div>
+                    <h3 class="mb-4">Sign up</h3>
+
+                    <form asp-action="SignUp">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <input asp-for="Email" class="form-control" type="email" placeholder="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-4">
+                            <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary shadow-2 mb-4">Sign up</button>
+                        <p class="mb-0 text-muted">
+                            Already have an account? <a asp-controller="Account" asp-action="Login">Log in</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Required Js -->
+    <script src="~/js/vendor-all.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

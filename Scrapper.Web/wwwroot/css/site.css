@@ -1,0 +1,102 @@
+/**====== Spinner from BS v5 start ======**/
+
+.visually-hidden, .visually-hidden-focusable:not(:focus):not(:focus-within) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -0.125em;
+    border: 0.25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: .75s linear infinite spinner-border;
+    animation: .75s linear infinite spinner-border;
+}
+
+@keyframes spinner-border {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/**====== Spinner from BS v5 end ======**/
+
+@-webkit-keyframes loader-border {
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loader-border {
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.loader-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    border: 0.25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
+}
+
+.loader-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.2em;
+}
+
+.search {
+    display: flex;
+}
+.acc-no.box {
+    position: relative;
+    padding: 0 0 0 20px;
+}
+.foreign-box .box.acc-no:before {
+    content: "";
+    background: rgb(206, 212, 218);
+    width: 2px;
+    height: calc(100% + 10px);
+    position: absolute;
+    left: 10px;
+    top: -6px;
+}
+.foreign-box {
+    border: 1px solid rgb(163 175 187);
+    padding: 8px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    align-items: center;
+}
+.foreign-box .box input {
+    max-width: 140px;
+}
+.foreign-box .box.acc-no input {
+    max-width: 100%;
+}
+.foreign-box .block {
+    display: flex;
+}
+.foreign-box #session .box input {
+    max-width: 140px;
+}

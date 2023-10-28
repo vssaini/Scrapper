@@ -1,0 +1,72 @@
+﻿@model Scrapper.Models.PaginationVm
+
+<div id='Paging' class="d-flex justify-content-center">
+    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @(Model.PageCount) (Total Record: @Model.TotalItemCount)*@
+
+    @if (Model.TotalItemCount > Model.PageSize)
+    {
+        var totalPages = (Model.TotalItemCount / Model.PageSize) + (Model.TotalItemCount % Model.PageSize > 0 ? 1 : 0);
+        <div class="pagination-container">
+            <ul class="pagination" data-last="@totalPages">
+                @if (totalPages > 10)
+                {
+                    <li class="page-item">
+                        <a href="javascript:void(0);" class="page-link">First</a>
+                    </li>
+                }
+
+                @if (Model.PageNumber != 1)
+                {
+                    <li class="PagedList-skipToPrevious page-item">
+                        <a href="javascript:void(0);" class="page-link" rel="prev">«</a>
+                    </li>
+                }
+
+                @if (totalPages > 10)
+                {
+                    if (totalPages - Model.PageNumber >= 10)
+                    {
+                        for (int i = Model.PageNumber; i < (10 + Model.PageNumber); i++)
+                        {
+                            <li class="@(Model.PageNumber == i ? "active" :"") page-item">
+                                <a href="javascript:void(0);" class="page-link">@i</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        for (int i = totalPages - 9; i <= totalPages; i++)
+                        {
+                            <li class="@(Model.PageNumber == i ? "active" :"") page-item">
+                                <a href="javascript:void(0);" class="page-link">@i</a>
+                            </li>
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="@(Model.PageNumber == i ? "active" :"") page-item">
+                            <a href="javascript:void(0);" class="page-link">@i</a>
+                        </li>
+                    }
+                }
+
+                @if (Model.PageNumber != totalPages)
+                {
+                    <li class="PagedList-skipToNext page-item">
+                        <a href="javascript:void(0);" class="page-link" rel="next">»</a>
+                    </li>
+                }
+
+                @if (totalPages > 10)
+                {
+                    <li class="page-item">
+                        <a href="javascript:void(0);" class="page-link">Last</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

@@ -1,0 +1,99 @@
+﻿@using Scrapper.Web.Helpers
+@model Scrapper.Domain.Abstractions.PageResult<Scrapper.Domain.Royalties.ScrapeResponse>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="row">
+    <!--Royalties start-->
+    <div class="col-xl-12 col-md-12">
+        <div class="card Recent-Users">
+            <div class="card-header">
+                <h5>Royalties</h5>
+            </div>
+
+            <div class="card-block ">
+
+                <div class="row justify-content-center align-items-center mb-4">
+
+                    <div class="col-auto">
+                        <label class="mr-3">Filter by</label>
+                        <input type="checkbox" id="chkToggle" data-toggle="switchbutton" checked data-width="180" data-onlabel="Foreign Statement" data-offlabel="Session" data-onstyle="primary" data-offstyle="secondary">
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="foreign-box">
+                            <div id="foreignStatement" class="block">
+                                <div class="box">
+                                    <input type="date" id="fsStartRange" class="form-control" value="1900-01-01" />
+                                </div>
+
+                                <div class="col-auto  p-0 text-center mt-2"><span class="form-label px-2">To</span></div>
+                                <div class="box">
+                                    <input type="date" id="fsEndRange" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                </div>
+                            </div>
+
+                            <div id="session" class="block d-none">
+                                <div class="box">
+                                    <input type="date" id="startRange" class="form-control" value="1900-01-01" />
+                                </div>
+
+                                <div class="col-auto  p-0 text-center mt-2"><span class="form-label px-2">To</span></div>
+                                <div class="box">
+                                    <input type="date" id="endRange" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                </div>
+                            </div>
+
+                            <div class="acc-no box">
+                                <input type="number" placeholder="Artist account number" id="accountNumber" class="form-control" />
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 search">
+                        <button class="btn btn-primary" id="btnSearch" onclick="home.searchRoyalties(this);"><span class="loader-border loader-border-sm d-none" role="status" aria-hidden="true"></span> <span>Search</span></button>
+
+                        <a href="#" onclick="home.downloadPdf()" class="btn btn-secondary">Download PDF <i class="feather icon-download mr-0"></i></a>
+                    </div>
+
+                </div>
+
+                @if (Model.Items.Count > 0)
+                {
+                    <div id="royalties">
+                        @await Html.PartialAsync("_Scrapes", Model)
+                    </div>
+                }
+            </div>
+
+            @if (Model.Items.Count <= 0)
+            {
+                <div class="row justify-content-center">
+                    <div class="col-sm-6">
+                        <div class="alert alert-warning text-center" role="alert">
+                            No royalties available.
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+    <!--Royalties end-->
+</div>
+
+@section scripts{
+    <script src="~/plugins/bootstrap-switch/js/bootstrap-switch-button.min.js"></script>
+    <script src="~/plugins/moment/moment.min.js"></script>
+    <script src="@Utilities.UrlVersioning("/js/index.js")"></script>
+
+    <script>
+        $(function () {
+            home.init();
+        });
+    </script>
+
+        }
