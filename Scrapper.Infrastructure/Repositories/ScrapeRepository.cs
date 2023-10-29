@@ -27,7 +27,7 @@ internal sealed class ScrapeRepository : IScrapeRepository
         var dParams = new DynamicParameters();
         dParams.Add("@StartDate", filter.DateRange.Start);
         dParams.Add("@EndDate", filter.DateRange.End);
-        dParams.Add("@ProductId", filter.ProductId);
+        dParams.Add("@SearchText", filter.SearchText);
         dParams.Add("@SortOrder", sort.SortOrder);
         dParams.Add("@SortMethod", sort.SortMethod);
         dParams.Add("@PageNumber", page.PageNumber);

@@ -28,12 +28,12 @@
                                     <input type="date" id="endRange" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                 </div>
                             </div>
-                            
+
                             <div class="acc-no box">
-                                <input type="text" placeholder="Product Id" id="productId" class="form-control" />
+                                <input type="text" placeholder="Enter Product Id or Product name to search for" id="searchTxt" class="form-control" />
                             </div>
 
-                            <div class="col-sm-4 search">
+                            <div class="col-sm-1 search">
                                 <button class="btn btn-primary" id="btnSearch" onclick="home.searchScrapes(this);"><span class="loader-border loader-border-sm d-none" role="status" aria-hidden="true"></span> <span>Search</span></button>
                             </div>
 
@@ -51,13 +51,7 @@
 
             @if (Model.Items.Count <= 0)
             {
-                <div class="row justify-content-center">
-                    <div class="col-sm-6">
-                        <div class="alert alert-warning text-center" role="alert">
-                            @WebConstants.NoRecordsMsg
-                        </div>
-                    </div>
-                </div>
+                await Html.RenderPartialAsync("_NoRecords");
             }
 
         </div>

@@ -37,9 +37,9 @@ var home = function () {
                 return false;
             }
 
-            const productId = $('#productId').val();
-            if (productId.length === 0) {
-                showMessage('Please enter product id.', 'warning');
+            const searchTxt = $('#searchTxt').val();
+            if (searchTxt.length === 0) {
+                showMessage('Please enter product id or product name to search.', 'warning');
                 return false;
             }
 
@@ -53,7 +53,7 @@ var home = function () {
                     Start: startDate.format('YYYY-MM-DD'),
                     End: endDate.format('YYYY-MM-DD')
                 },
-                ProductId: $('#productId').val(),
+                SearchText: $('#searchTxt').val(),
                 Pagination: {
                     PageNumber: pageNumber,
                     PageSize: pageSize
@@ -117,7 +117,7 @@ var home = function () {
                     Start: moment([1753, 1, 1]),
                     End: moment()
                 },
-                ProductId: $('#productId').val(),
+                SearchText: $('#searchTxt').val(),
                 Pagination: {
                     PageNumber: pageNumber,
                     PageSize: pageSize

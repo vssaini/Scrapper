@@ -41,7 +41,7 @@ namespace Scrapper.Web.Controllers
         {
             var pageResult = new PageResult<ScrapeResponse>();
 
-            _logger.LogInformation("Searching scrapes for product {ProductId}. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.ProductId, request.DateRange.Start, request.DateRange.End, request.Pagination.PageNumber, request.Pagination.PageSize);
+            _logger.LogInformation("Searching scrapes for search text '{SearchText}'. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.SearchText, request.DateRange.Start, request.DateRange.End, request.Pagination.PageNumber, request.Pagination.PageSize);
 
             try
             {
