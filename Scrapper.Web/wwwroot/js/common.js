@@ -154,3 +154,16 @@ var changeInputButtonState = function (eleId, buttonTxt, disable) {
     $(eleId).attr('disabled', disable);
     $(eleId).val(buttonTxt);
 };
+
+/**
+* Redirect to URL with history in browser. Pass second parameter as true to redirect without history.
+*/
+function redirectToUrl(url, withoutHistory = false) {
+
+    if (withoutHistory) {
+        // It won't create an entry in browser's history
+        window.location.replace(url);
+    } else {
+        window.location.href = url;
+    }
+}

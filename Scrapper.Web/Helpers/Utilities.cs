@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using Serilog.Debugging;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace Scrapper.Web.Helpers;
 
@@ -33,5 +35,22 @@ public class Utilities
 
         Thread.CurrentThread.CurrentCulture = cultureInfo;
         Thread.CurrentThread.CurrentUICulture = cultureInfo;
+    }
+
+    public static void EnableSerilogSelfLogging()
+    {
+        try
+        {
+            var errorFilePath = $"{Directory.GetCurrentDirectory()}\\Logs\\Scrapper.SerilogInternalErrors.log";
+
+            // Ref - https://arefinblog.wordpress.com/2011/06/20/thread-safe-streamwriter/
+            SelfLog.Enable(TextWriter.Synchronized(File.AppendText(errorFilePath)));
+        }
+        catch (Exception exc)
+        {
+            // Error can be seen from Azure Log Stream
+            Debug.Write(exc.Message);
+            Trace.TraceError(exc.Message);
+        }
     }
 }

@@ -10,10 +10,12 @@ var home = function () {
 
         if (searching) {
             $(btnSearch).find('span.loader-border').removeClass('d-none');
+            $(btnSearch).find('i.fa-search').addClass('d-none');
             $(btnSearch).find("span:contains('Search')").text('Searching');
             $(btnSearch).addClass('disabled');
         } else {
             $(btnSearch).find('span.loader-border').addClass('d-none');
+            $(btnSearch).find('i.fa-search').removeClass('d-none');
             $(btnSearch).find("span:contains('Searching')").text('Search');
             $(btnSearch).removeClass('disabled');
         }
@@ -37,11 +39,11 @@ var home = function () {
                 return false;
             }
 
-            const searchTxt = $('#searchTxt').val();
-            if (searchTxt.length === 0) {
-                showMessage('Please enter product id or product name to search.', 'warning');
-                return false;
-            }
+            //const searchTxt = $('#searchTxt').val();
+            //if (searchTxt.length === 0) {
+            //    showMessage('Please enter product id or product name to search.', 'warning');
+            //    return false;
+            //}
 
             return true;
         },
@@ -168,14 +170,21 @@ var home = function () {
                         callSearchApi(pageNumber, 10);
                 });
         },
-        
-        init = function () {
+
+        showProductLogs = function (productId) {
+
+            const url = `/Product?productId=${productId}`;
+            redirectToUrl(url);
+        },
+
+    init = function () {
 
             changePage();
         };
 
     return {
         init: init,
-        searchScrapes: searchScrapes
+        searchScrapes: searchScrapes,
+        showProductLogs: showProductLogs
     };
 }();

@@ -1,0 +1,11 @@
+﻿@{
+    const string error = "Internal Server Error";
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+    ViewBag.Title = error;
+}
+
+<div class="notfound-404">
+    <h1>500</h1>
+</div>
+<h2>@error</h2>
+<p>It's broken, but it's not your fault. Please contact administrator. <a href="@Url.Content("~")">Return to home</a></p>

@@ -7,6 +7,7 @@ using Scrapper.Application.Abstractions.Data;
 using Scrapper.Application.Abstractions.Email;
 using Scrapper.Application.Abstractions.Logger;
 using Scrapper.Domain.Abstractions;
+using Scrapper.Domain.Products;
 using Scrapper.Domain.Scrapes;
 using Scrapper.Infrastructure.Clock;
 using Scrapper.Infrastructure.Data;
@@ -35,7 +36,6 @@ public static class DependencyInjection
     private static void AddPersistence(IServiceCollection services, IConfiguration configuration)
     {
         var conString = configuration.GetConnectionString("ScrapperConString") ?? throw new ArgumentNullException(nameof(configuration));
-
         Log.Warning("Using connection string {ConnectionString}", conString);
 
         services.AddDbContext<ApplicationDbContext>(options =>
@@ -43,12 +43,12 @@ public static class DependencyInjection
             options.UseSqlServer(conString);
         });
 
-        services.AddScoped<IScrapeRepository, ScrapeRepository>();
-
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
         services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(conString));
-
         SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
+
+        services.AddScoped<IScrapeRepository, ScrapeRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
     }
 }

@@ -1,0 +1,34 @@
+﻿@using Scrapper.Web.Helpers
+@model Scrapper.Domain.Products.Product
+@{
+    ViewData["Title"] = "Product Logs";
+}
+
+<input type="hidden" id="productId" value="@Model.ProductId" />
+
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="card Recent-Users">
+            <div class="card-header">
+                <h5>@Model.ProductName Logs</h5>
+            </div>
+
+            <div class="card-block ">
+                <div id="productLogs">
+                    @await Html.PartialAsync("_Logs", Model.Logs)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="@Utilities.UrlVersioning("/js/pages/product.js")"></script>
+
+    <script>
+        $(function () {
+            product.init();
+        });
+    </script>
+
+}

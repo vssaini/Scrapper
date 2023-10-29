@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Scrapper.Domain.Abstractions;
 using Scrapper.Domain.Scrapes;
 using Scrapper.Web.Contracts;
-using Scrapper.Web.Models;
-using System.Diagnostics;
 
 namespace Scrapper.Web.Controllers
 {
@@ -53,13 +51,6 @@ namespace Scrapper.Web.Controllers
             }
 
             return PartialView("_Scrapes", pageResult);
-        }
-
-        [AllowAnonymous]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

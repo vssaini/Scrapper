@@ -6,16 +6,16 @@ namespace Scrapper.Application.Scrapes.SearchScrapes;
 
 internal sealed class SearchScrapesQueryHandler : IQueryHandler<SearchScrapesQuery, PageResult<ScrapeResponse>>
 {
-    private readonly IScrapeRepository _royRepo;
+    private readonly IScrapeRepository _scrapeRepo;
 
-    public SearchScrapesQueryHandler(IScrapeRepository royRepo)
+    public SearchScrapesQueryHandler(IScrapeRepository scrapeRepo)
     {
-        _royRepo = royRepo;
+        _scrapeRepo = scrapeRepo;
     }
 
-    public async Task<PageResult<ScrapeResponse>> Handle(SearchScrapesQuery request, CancellationToken cancellationToken)
+    public async Task<PageResult<ScrapeResponse>> Handle(SearchScrapesQuery query, CancellationToken cancellationToken)
     {
-        var pageResult = await _royRepo.GetScrapePageResultAsync(request.Filter, request.Page, request.Sort);
+        var pageResult = await _scrapeRepo.GetScrapePageResultAsync(query.Filter, query.Page, query.Sort);
         return pageResult;
     }
 }

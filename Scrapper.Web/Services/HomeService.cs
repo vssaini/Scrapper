@@ -22,7 +22,7 @@ public class HomeService : IHomeService
         var filter = new SearchFilter(request.DateRange, request.SearchText);
         var query = new SearchScrapesQuery(filter,
             new Pagination(request.Pagination.PageNumber, request.Pagination.PageSize),
-            new Sort("Id", "ASC"));
+            new Sort("BatchDate", "DESC"));
 
         var pageResult = await _sender.Send(query);
         return pageResult;

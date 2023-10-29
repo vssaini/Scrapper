@@ -34,7 +34,10 @@
                             </div>
 
                             <div class="col-sm-1 search">
-                                <button class="btn btn-primary" id="btnSearch" onclick="home.searchScrapes(this);"><span class="loader-border loader-border-sm d-none" role="status" aria-hidden="true"></span> <span>Search</span></button>
+                                <button class="btn btn-primary" id="btnSearch" onclick="home.searchScrapes(this);">
+                                    <i class="fas fa-search"></i>
+                                    <span class="loader-border loader-border-sm mr-3 d-none" role="status" aria-hidden="true"></span>
+                                    <span>Search</span></button>
                             </div>
 
                         </div>
@@ -60,9 +63,8 @@
 </div>
 
 @section scripts{
-    <script src="~/plugins/bootstrap-switch/js/bootstrap-switch-button.min.js"></script>
     <script src="~/plugins/moment/moment.min.js"></script>
-    <script src="@Utilities.UrlVersioning("/js/index.js")"></script>
+    <script src="@Utilities.UrlVersioning("/js/pages/home.js")"></script>
 
     <script>
         $(function () {
