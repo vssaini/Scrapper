@@ -8,6 +8,6 @@ public class WebConstants
 
     public const string FirebaseSectionName = "Firebase";
 
-    public const string NoRecordsMsg = "No scrapes available.";
+    public const string NoRecordsMsg = "No records available.";
     public const string DateFormatForViews = "MM-dd-yyyy";
 }
