@@ -114,8 +114,8 @@ var home = function () {
 
             const searchRequest = {
                 DateRange: {
-                    Start: moment([1753, 1, 1]).format('YYYY-MM-DD'),
-                    End: moment().format('YYYY-MM-DD')
+                    Start: moment([1753, 1, 1]),
+                    End: moment()
                 },
                 ProductId: $('#productId').val(),
                 Pagination: {
