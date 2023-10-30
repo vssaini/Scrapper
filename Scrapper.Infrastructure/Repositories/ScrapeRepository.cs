@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Scrapper.Domain.Abstractions;
-using System.Data;
 using Scrapper.Domain.Scrapes;
+using System.Data;
 
 namespace Scrapper.Infrastructure.Repositories;
 
@@ -24,9 +24,12 @@ internal sealed class ScrapeRepository : IScrapeRepository
 
     private static DynamicParameters GetParamsForSearchSp(SearchFilter filter, Page page, Sort sort)
     {
+        // Because time is coming without hours & it is causing issues with SP
+        var endDate = filter.DateRange.End.AddHours(11).AddMinutes(59).AddSeconds(59);
+
         var dParams = new DynamicParameters();
         dParams.Add("@StartDate", filter.DateRange.Start);
-        dParams.Add("@EndDate", filter.DateRange.End);
+        dParams.Add("@EndDate", endDate);
         dParams.Add("@SearchText", filter.SearchText);
 
         dParams.Add("@SortColumn", sort.Column);
