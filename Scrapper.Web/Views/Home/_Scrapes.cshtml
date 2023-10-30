@@ -32,11 +32,11 @@ else
             <thead>
                 <tr>
                     <th id="h-Id" onclick="home.sortScrapes('Id')"><a>Id</a></th>
-                    <th id="h-Batch" onclick="home.sortScrapes('Batch')"><a>Batch</a></th>
                     <th id="h-BatchDate" onclick="home.sortScrapes('BatchDate')"><a>Batch Date</a></th>
                     <th id="h-ProductId" onclick="home.sortScrapes('ProductId')"><a>Product Id</a></th>
                     <th id="h-ProductName" onclick="home.sortScrapes('ProductName')"><a>Product Name</a></th>
-                    <th id="h-ProductPrice" onclick="home.sortScrapes('ProductPrice')"><a>Product Price</a></th>
+                    <th id="h-MaxPrice" onclick="home.sortScrapes('MaxPrice')"><a>Max Price</a></th>
+                    <th id="h-MinPrice" onclick="home.sortScrapes('MinPrice')"><a>Min Price</a></th>
                 </tr>
             </thead>
 
@@ -45,11 +45,11 @@ else
                 {
                     <tr onclick="home.showProductLogs('@item.ProductId')">
                         <td>@item.Id</td>
-                        <td>@item.Batch</td>
                         <td>@item.BatchDate.ToString(WebConstants.DateFormatForViews)</td>
                         <td>@item.ProductId</td>
                         <td><span title="@item.ProductName">@item.ProductName</span></td>
-                        <td>@item.ProductPrice</td>
+                        <td>@item.MaxPrice</td>
+                        <td>@item.MinPrice</td>
                     </tr>
                 }
 

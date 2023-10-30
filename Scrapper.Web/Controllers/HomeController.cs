@@ -20,7 +20,7 @@ namespace Scrapper.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var scrapeResult = new ScrapeResult(new PageResult<ScrapeResponse>(), null, null);
+            var scrapeResult = new ScrapeResult(new PageResult<Scrape>(), null, null);
 
             try
             {
@@ -37,7 +37,7 @@ namespace Scrapper.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SearchScrapes([FromBody] SearchRequest request)
         {
-            var scrapeResult = new ScrapeResult(new PageResult<ScrapeResponse>(), request.Page, request.Sort);
+            var scrapeResult = new ScrapeResult(new PageResult<Scrape>(), request.Page, request.Sort);
 
             _logger.LogInformation("Searching scrapes for search text '{SearchText}'. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.SearchText, request.DateRange.Start, request.DateRange.End, request.Page.Number, request.Page.Size);
 

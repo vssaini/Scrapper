@@ -4,7 +4,7 @@ using Scrapper.Domain.Scrapes;
 
 namespace Scrapper.Application.Scrapes.SearchScrapes;
 
-internal sealed class SearchScrapesQueryHandler : IQueryHandler<SearchScrapesQuery, PageResult<ScrapeResponse>>
+internal sealed class SearchScrapesQueryHandler : IQueryHandler<SearchScrapesQuery, PageResult<Scrape>>
 {
     private readonly IScrapeRepository _scrapeRepo;
 
@@ -13,7 +13,7 @@ internal sealed class SearchScrapesQueryHandler : IQueryHandler<SearchScrapesQue
         _scrapeRepo = scrapeRepo;
     }
 
-    public async Task<PageResult<ScrapeResponse>> Handle(SearchScrapesQuery query, CancellationToken cancellationToken)
+    public async Task<PageResult<Scrape>> Handle(SearchScrapesQuery query, CancellationToken cancellationToken)
     {
         var pageResult = await _scrapeRepo.GetScrapePageResultAsync(query.Filter, query.Page, query.Sort);
         return pageResult;

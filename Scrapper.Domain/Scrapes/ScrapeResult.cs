@@ -2,4 +2,4 @@
 
 namespace Scrapper.Domain.Scrapes;
 
-public record ScrapeResult(PageResult<ScrapeResponse> Scrapes, Page Page, Sort Sort);
+public record ScrapeResult(PageResult<Scrape> Scrapes, Page Page, Sort Sort);
