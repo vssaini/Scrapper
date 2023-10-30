@@ -4,4 +4,4 @@ using Scrapper.Domain.Products;
 
 namespace Scrapper.Application.Products.ProductLogs;
 
-public sealed record ProductLogsQuery(ProductFilter Filter, Pagination Page, Sort Sort) : IQuery<PageResult<ProductResponse>>;
+public sealed record ProductLogsQuery(ProductFilter Filter, Page Page, Sort Sort) : IQuery<PageResult<ProductResponse>>;

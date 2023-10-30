@@ -2,4 +2,4 @@
 
 namespace Scrapper.Domain.Products;
 
-public record ProductRequest(string ProductId, Pagination Pagination);
+public record ProductRequest(string ProductId, Page Pagination);

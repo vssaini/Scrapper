@@ -15,36 +15,37 @@ internal sealed class ScrapeRepository : IScrapeRepository
         _dbContext = dbContext;
     }
 
-    public async Task<PageResult<ScrapeResponse>> GetScrapePageResultAsync(SearchFilter filter, Pagination page, Sort sort)
+    public async Task<PageResult<ScrapeResponse>> GetScrapePageResultAsync(SearchFilter filter, Page page, Sort sort)
     {
         var dParams = GetParamsForSearchSp(filter, page, sort);
         var pageResult = await SearchScrapesAsync(dParams, page);
         return pageResult;
     }
 
-    private static DynamicParameters GetParamsForSearchSp(SearchFilter filter, Pagination page, Sort sort)
+    private static DynamicParameters GetParamsForSearchSp(SearchFilter filter, Page page, Sort sort)
     {
         var dParams = new DynamicParameters();
         dParams.Add("@StartDate", filter.DateRange.Start);
         dParams.Add("@EndDate", filter.DateRange.End);
         dParams.Add("@SearchText", filter.SearchText);
-        dParams.Add("@SortOrder", sort.SortOrder);
-        dParams.Add("@SortMethod", sort.SortMethod);
-        dParams.Add("@PageNumber", page.PageNumber);
-        dParams.Add("@PageSize", page.PageSize);
+
+        dParams.Add("@SortColumn", sort.Column);
+        dParams.Add("@SortDirection", sort.Direction);
+        dParams.Add("@PageNumber", page.Number);
+        dParams.Add("@PageSize", page.Size);
 
         return dParams;
     }
 
-    private async Task<PageResult<ScrapeResponse>> SearchScrapesAsync(SqlMapper.IDynamicParameters dParams, Pagination page)
+    private async Task<PageResult<ScrapeResponse>> SearchScrapesAsync(SqlMapper.IDynamicParameters dParams, Page page)
     {
         var scrapes = await GetScrapesFromDbAsync(dParams);
 
         return new PageResult<ScrapeResponse>
         {
             Items = scrapes,
-            Page = page.PageNumber,
-            PageSize = page.PageSize,
+            Page = page.Number,
+            PageSize = page.Size,
             TotalItems = scrapes.Count > 0 ? scrapes.Select(x => x.TotalRows).First() : 0
         };
     }

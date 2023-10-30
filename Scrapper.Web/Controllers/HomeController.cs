@@ -20,37 +20,37 @@ namespace Scrapper.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var pageResult = new PageResult<ScrapeResponse>();
+            var scrapeResult = new ScrapeResult(new PageResult<ScrapeResponse>(), null, null);
 
             try
             {
-                pageResult = await _homeService.GetScrapesAsync(null);
+                scrapeResult = await _homeService.GetScrapesAsync(null);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Error while retrieving scrapes.");
             }
 
-            return View(pageResult);
+            return View(scrapeResult);
         }
 
         [HttpPost]
         public async Task<IActionResult> SearchScrapes([FromBody] SearchRequest request)
         {
-            var pageResult = new PageResult<ScrapeResponse>();
+            var scrapeResult = new ScrapeResult(new PageResult<ScrapeResponse>(), request.Page, request.Sort);
 
-            _logger.LogInformation("Searching scrapes for search text '{SearchText}'. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.SearchText, request.DateRange.Start, request.DateRange.End, request.Pagination.PageNumber, request.Pagination.PageSize);
+            _logger.LogInformation("Searching scrapes for search text '{SearchText}'. Start date - {StartDate} & End date - {EndDate}. Page number - {PageNumber} & Page size - {PageSize}.", request.SearchText, request.DateRange.Start, request.DateRange.End, request.Page.Number, request.Page.Size);
 
             try
             {
-                pageResult = await _homeService.GetScrapesAsync(request);
+                scrapeResult = await _homeService.GetScrapesAsync(request);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Error while searching scrapes.");
             }
 
-            return PartialView("_Scrapes", pageResult);
+            return PartialView("_Scrapes", scrapeResult);
         }
     }
 }

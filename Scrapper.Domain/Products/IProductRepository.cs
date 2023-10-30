@@ -5,5 +5,5 @@ namespace Scrapper.Domain.Products;
 
 public interface IProductRepository
 {
-    Task<PageResult<ProductResponse>> GetProductLogsAsync(ProductFilter filter, Pagination page, Sort sort);
+    Task<PageResult<ProductResponse>> GetProductLogsAsync(ProductFilter filter, Page page, Sort sort);
 }

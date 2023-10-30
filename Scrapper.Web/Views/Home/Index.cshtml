@@ -1,11 +1,10 @@
 ﻿@using Scrapper.Web.Helpers
-@model Scrapper.Domain.Abstractions.PageResult<Scrapper.Domain.Scrapes.ScrapeResponse>
+@model Scrapper.Domain.Scrapes.ScrapeResult
 @{
     ViewData["Title"] = "Home";
 }
 
 <div class="row">
-    <!--Scrapes start-->
     <div class="col-xl-12 col-md-12">
         <div class="card Recent-Users">
             <div class="card-header">
@@ -37,14 +36,15 @@
                                 <button class="btn btn-primary" id="btnSearch" onclick="home.searchScrapes(this);">
                                     <i class="fas fa-search"></i>
                                     <span class="loader-border loader-border-sm mr-3 d-none" role="status" aria-hidden="true"></span>
-                                    <span>Search</span></button>
+                                    <span>Search</span>
+                                </button>
                             </div>
 
                         </div>
                     </div>
                 </div>
 
-                @if (Model.Items.Count > 0)
+                @if (Model.Scrapes.Items.Count > 0)
                 {
                     <div id="scrapes">
                         @await Html.PartialAsync("_Scrapes", Model)
@@ -52,14 +52,13 @@
                 }
             </div>
 
-            @if (Model.Items.Count <= 0)
+            @if (Model.Scrapes.Items.Count <= 0)
             {
                 await Html.RenderPartialAsync("_NoRecords");
             }
 
         </div>
     </div>
-    <!--Scrapes end-->
 </div>
 
 @section scripts{

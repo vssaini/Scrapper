@@ -1,3 +1,3 @@
 ﻿namespace Scrapper.Domain.Abstractions;
 
-public record Sort(string SortOrder, string SortMethod);
+public record Sort(string Column, string Direction);

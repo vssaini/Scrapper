@@ -1,7 +1,8 @@
-﻿@model Scrapper.Domain.Abstractions.PageResult<Scrapper.Domain.Scrapes.ScrapeResponse>
+﻿@model Scrapper.Domain.Scrapes.ScrapeResult
 
 @{
-    var paginationVm = new PaginationVm(Model.TotalItems, Model.Page, Model.TotalPages, Model.PageSize);
+    var scrapes = Model.Scrapes;
+    var paginationVm = new PaginationVm(scrapes.TotalItems, Model.Page.Number, scrapes.TotalPages, Model.Page.Size);
 }
 
 <style>
@@ -16,27 +17,31 @@
 
 </style>
 
-@if (Model.Items.Count <= 0)
+@if (scrapes.Items.Count <= 0)
 {
     await Html.RenderPartialAsync("_NoRecords");
 }
 else
 {
+    <input type="hidden" value="@Model.Page.Number" id="pageNumber" />
+    <input type="hidden" value="@Model.Sort.Column" id="sortColumn" />
+    <input type="hidden" value="@Model.Sort.Direction" id="sortDirection" />
+
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th><a>Id</a></th>
-                    <th><a>Batch</a></th>
-                    <th><a>Batch Date</a></th>
-                    <th><a>Product Id</a></th>
-                    <th><a>Product Name</a></th>
-                    <th><a>Product Price</a></th>
+                    <th id="h-Id" onclick="home.sortScrapes('Id')"><a>Id</a></th>
+                    <th id="h-Batch" onclick="home.sortScrapes('Batch')"><a>Batch</a></th>
+                    <th id="h-BatchDate" onclick="home.sortScrapes('BatchDate')"><a>Batch Date</a></th>
+                    <th id="h-ProductId" onclick="home.sortScrapes('ProductId')"><a>Product Id</a></th>
+                    <th id="h-ProductName" onclick="home.sortScrapes('ProductName')"><a>Product Name</a></th>
+                    <th id="h-ProductPrice" onclick="home.sortScrapes('ProductPrice')"><a>Product Price</a></th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach (var item in Model.Items)
+                @foreach (var item in scrapes.Items)
                 {
                     <tr onclick="home.showProductLogs('@item.ProductId')">
                         <td>@item.Id</td>

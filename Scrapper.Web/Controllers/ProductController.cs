@@ -22,7 +22,7 @@ namespace Scrapper.Web.Controllers
 
             try
             {
-                product = await _prodService.GetProductAsync(new ProductRequest(productId, new Pagination(1, 10)));
+                product = await _prodService.GetProductAsync(new ProductRequest(productId, new Page(1, 10)));
             }
             catch (Exception e)
             {

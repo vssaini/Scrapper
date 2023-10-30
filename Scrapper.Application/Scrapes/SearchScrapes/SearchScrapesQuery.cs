@@ -4,4 +4,4 @@ using Scrapper.Domain.Scrapes;
 
 namespace Scrapper.Application.Scrapes.SearchScrapes;
 
-public sealed record SearchScrapesQuery(SearchFilter Filter, Pagination Page, Sort Sort) : IQuery<PageResult<ScrapeResponse>>;
+public sealed record SearchScrapesQuery(SearchFilter Filter, Page Page, Sort Sort) : IQuery<PageResult<ScrapeResponse>>;
