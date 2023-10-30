@@ -4,8 +4,9 @@ var isDefaultSearch = true;
 var startDate = moment();
 var endDate = moment();
 
-var asc = 'ASC';
-var desc = 'DESC';
+const defaultPageSize = 10;
+const asc = 'ASC';
+const desc = 'DESC';
 
 var home = function () {
 
@@ -146,7 +147,7 @@ var home = function () {
         searchScrapes = function () {
 
             isDefaultSearch = false;
-            callSearchApi(1, 10);
+            callSearchApi(1, defaultPageSize);
         },
 
         applySortClass = function () {
@@ -212,9 +213,9 @@ var home = function () {
                     }
 
                     if (isDefaultSearch)
-                        callSearchApiWithDefaultOptions(pageNumber, 10);
+                        callSearchApiWithDefaultOptions(pageNumber, defaultPageSize);
                     else
-                        callSearchApi(pageNumber, 10);
+                        callSearchApi(pageNumber, defaultPageSize);
                 });
         },
 

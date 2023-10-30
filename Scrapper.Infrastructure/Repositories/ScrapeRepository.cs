@@ -44,7 +44,7 @@ internal sealed class ScrapeRepository : IScrapeRepository
         return new PageResult<Scrape>
         {
             Items = scrapes,
-            Page = page.Number,
+            PageNumber = page.Number,
             PageSize = page.Size,
             TotalItems = scrapes.Count > 0 ? scrapes.Select(x => x.TotalRows).First() : 0
         };

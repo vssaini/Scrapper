@@ -37,6 +37,7 @@ else
                     <th id="h-ProductName" onclick="home.sortScrapes('ProductName')"><a>Product Name</a></th>
                     <th id="h-MaxPrice" onclick="home.sortScrapes('MaxPrice')"><a>Max Price</a></th>
                     <th id="h-MinPrice" onclick="home.sortScrapes('MinPrice')"><a>Min Price</a></th>
+                    <th id="h-ProductStock" onclick="home.sortScrapes('ProductStock')"><a>Product Stock</a></th>
                 </tr>
             </thead>
 
@@ -50,6 +51,7 @@ else
                         <td><span title="@item.ProductName">@item.ProductName</span></td>
                         <td>@item.MaxPrice.ToString("C")</td>
                         <td>@item.MinPrice.ToString("C")</td>
+                        <td>@item.ProductStock</td>
                     </tr>
                 }
 

@@ -10,4 +10,5 @@ public class WebConstants
 
     public const string NoRecordsMsg = "No records available.";
     public const string DateFormatForViews = "MM-dd-yyyy";
+    public const string DateWithTime = "MM-dd-yyyy hh:mm:ss tt";
 }

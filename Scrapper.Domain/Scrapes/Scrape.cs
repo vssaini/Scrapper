@@ -14,5 +14,7 @@ public sealed class Scrape
 
     public decimal MinPrice { get; init; }
 
+    public int ProductStock { get; set; }
+
     public int TotalRows { get; set; }
 }

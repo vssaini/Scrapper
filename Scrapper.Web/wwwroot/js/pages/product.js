@@ -1,5 +1,7 @@
 ﻿var controller = 'Product';
 
+const defaultPageSize = 10;
+
 var product = function () {
 
     const changeSearchStatus = function (searching, btnSearch) {
@@ -20,9 +22,9 @@ var product = function () {
 
             const productRequest = {
                 ProductId: $('#productId').val(),
-                Pagination: {
-                    PageNumber: pageNumber,
-                    PageSize: pageSize
+                Page: {
+                    Number: pageNumber,
+                    Size: pageSize
                 }
             }
 
@@ -49,8 +51,8 @@ var product = function () {
                 changeSearchStatus(false, $('#btnSearch'));
             };
 
-            const searchRequest = getProductRequest(pageNumber, pageSize);
-            ajaxCall('POST', `/${controller}/Logs`, successCallback, errorCallback, searchRequest, null, 'html');
+            const prodRequest = getProductRequest(pageNumber, pageSize);
+            ajaxCall('POST', `/${controller}/Logs`, successCallback, errorCallback, prodRequest, null, 'html');
         },
 
         changePage = function () {
@@ -81,7 +83,7 @@ var product = function () {
                         pageNumber = parseInt(pageNumberText);
                     }
 
-                    fetchProductLogs(pageNumber, 10);
+                    fetchProductLogs(pageNumber, defaultPageSize);
                 });
         },
 

@@ -42,7 +42,7 @@ internal sealed class ProductRepository : IProductRepository
         return new PageResult<ProductResponse>
         {
             Items = productLogs,
-            Page = page.Number,
+            PageNumber = page.Number,
             PageSize = page.Size,
             TotalItems = productLogs.Count > 0 ? productLogs.Select(x => x.TotalRows).First() : 0
         };

@@ -1,7 +1,7 @@
 ﻿@model Scrapper.Domain.Abstractions.PageResult<Scrapper.Domain.Products.ProductResponse>
 
 @{
-    var paginationVm = new PaginationVm(Model.TotalItems, Model.Page, Model.TotalPages, Model.PageSize);
+    var paginationVm = new PaginationVm(Model.TotalItems, Model.PageNumber, Model.TotalPages, Model.PageSize);
 }
 
 @if (Model.Items.Count <= 0)
@@ -14,8 +14,10 @@ else
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th><a>Batch</a></th>
+                    <th><a>Source</a></th>
+                    <th><a>Batch Id</a></th>
                     <th><a>Batch Date</a></th>
+                    <th><a>Product Stock</a></th>
                     <th><a>Product Price</a></th>
                 </tr>
             </thead>
@@ -24,8 +26,10 @@ else
                 @foreach (var item in Model.Items)
                 {
                     <tr>
+                        <td>@item.Source</td>
                         <td>@item.Batch</td>
-                        <td>@item.BatchDate.ToString(WebConstants.DateFormatForViews)</td>
+                        <td>@item.BatchDate.ToString(WebConstants.DateWithTime)</td>
+                        <td>@item.ProductStock</td>
                         <td>@item.ProductPrice.ToString("C")</td>
                     </tr>
                 }

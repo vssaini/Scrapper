@@ -28,7 +28,7 @@ public class ProductService : IProductService
     {
         var filter = new ProductFilter(request.ProductId);
         var query = new ProductLogsQuery(filter,
-            new Page(request.Pagination.Number, request.Pagination.Size),
+            new Page(request.Page.Number, request.Page.Size),
             new Sort("BatchDate", "DESC"));
 
         var pageResult = await _sender.Send(query);

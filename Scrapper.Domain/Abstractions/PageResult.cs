@@ -10,10 +10,10 @@
         /// <summary>
         /// Gets or sets the current page number.
         /// </summary>
-        public int Page { get; set; }
+        public int PageNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of records per page.
+        /// Gets or sets the number of records to show per page.
         /// </summary>
         public int PageSize { get; set; }
 
