@@ -119,3 +119,13 @@ td {
     max-width: 500px;
     word-wrap: break-word;
 }
+
+.d-grid {
+    display: grid;
+}
+
+    .d-grid .page-status {
+        display: block !important;
+        padding-bottom: 11px;
+        text-align: center;
+    }
