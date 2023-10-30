@@ -28,15 +28,6 @@ public class Utilities
         return url;
     }
 
-    public static void SetAppCulture()
-    {
-        const string culture = "en-US";
-        var cultureInfo = CultureInfo.GetCultureInfo(culture);
-
-        Thread.CurrentThread.CurrentCulture = cultureInfo;
-        Thread.CurrentThread.CurrentUICulture = cultureInfo;
-    }
-
     public static void EnableSerilogSelfLogging()
     {
         try

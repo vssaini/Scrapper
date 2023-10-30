@@ -10,9 +10,9 @@ public sealed class Scrape
 
     public string ProductName { get; init; }
 
-    public string MaxPrice { get; init; }
+    public decimal MaxPrice { get; init; }
 
-    public string MinPrice { get; init; }
+    public decimal MinPrice { get; init; }
 
     public int TotalRows { get; set; }
 }

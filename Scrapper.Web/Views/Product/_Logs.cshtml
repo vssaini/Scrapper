@@ -26,7 +26,7 @@ else
                     <tr>
                         <td>@item.Batch</td>
                         <td>@item.BatchDate.ToString(WebConstants.DateFormatForViews)</td>
-                        <td>@item.ProductPrice</td>
+                        <td>@item.ProductPrice.ToString("C")</td>
                     </tr>
                 }
 

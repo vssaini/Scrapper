@@ -8,7 +8,7 @@ public sealed class ProductResponse
 
     public string ProductName { get; init; }
 
-    public string ProductPrice { get; init; }
+    public decimal ProductPrice { get; init; }
 
     public int TotalRows { get; set; }
 }

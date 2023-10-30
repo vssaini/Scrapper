@@ -48,8 +48,8 @@ else
                         <td>@item.BatchDate.ToString(WebConstants.DateFormatForViews)</td>
                         <td>@item.ProductId</td>
                         <td><span title="@item.ProductName">@item.ProductName</span></td>
-                        <td>@item.MaxPrice</td>
-                        <td>@item.MinPrice</td>
+                        <td>@item.MaxPrice.ToString("C")</td>
+                        <td>@item.MinPrice.ToString("C")</td>
                     </tr>
                 }
 

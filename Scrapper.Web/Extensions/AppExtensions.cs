@@ -26,9 +26,11 @@ public static class AppExtensions
             }
         });
 
+        app.UseRequestLocalization("en-US");
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
+        
         app.UseSerilogRequestLogging();
 
         app.UseRouting();
@@ -37,7 +39,7 @@ public static class AppExtensions
         app.UseCookiePolicy();
         app.UseAuthentication();
         app.UseAuthorization();
-
+        
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");

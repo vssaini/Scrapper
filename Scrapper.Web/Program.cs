@@ -15,7 +15,6 @@ Log.Information("Starting application {ApplicationName}", WebConstants.AppName);
 try
 {
     Utilities.EnableSerilogSelfLogging();
-    Utilities.SetAppCulture();
 
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
