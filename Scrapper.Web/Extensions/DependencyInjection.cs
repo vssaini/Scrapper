@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.DataProtection;
+using Scrapper.Infrastructure;
 using Scrapper.Web.Contracts;
 using Scrapper.Web.Models;
 using Scrapper.Web.Services;
@@ -12,6 +14,7 @@ public static class DependencyInjection
     {
         services.BindSettings(configuration);
 
+        services.ConfigureDataProtection();
         services.ConfigureSession();
         services.ConfigureAuthentication();
         services.ConfigureDependencies();
@@ -20,6 +23,12 @@ public static class DependencyInjection
     private static void BindSettings(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<Models.Settings.Firebase>(options => configuration.GetSection(WebConstants.FirebaseSectionName).Bind(options));
+    }
+
+    public static void ConfigureDataProtection(this IServiceCollection services)
+    {
+        services.AddDataProtection()
+            .PersistKeysToDbContext<ApplicationDbContext>();
     }
 
     private static void ConfigureSession(this IServiceCollection services)
@@ -38,7 +47,6 @@ public static class DependencyInjection
             .AddCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                //options.Cookie.SecurePolicy = _environment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.SameSite = SameSiteMode.Lax;
 
@@ -51,7 +59,6 @@ public static class DependencyInjection
         {
             options.MinimumSameSitePolicy = SameSiteMode.Strict;
             options.HttpOnly = HttpOnlyPolicy.None;
-            //options.Secure = _environment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
             options.Secure = CookieSecurePolicy.Always;
         });
     }

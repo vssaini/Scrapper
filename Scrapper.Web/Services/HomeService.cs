@@ -15,7 +15,7 @@ public class HomeService : IHomeService
         _sender = sender;
     }
 
-    public async Task<ScrapeResult> GetScrapesAsync(SearchRequest? request)
+    public async Task<ScrapeResult> GetScrapesAsync(SearchRequest request)
     {
         request ??= GetDefaultSearchRequest();
 

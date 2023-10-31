@@ -1,19 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Scrapper.Application.Abstractions.Clock;
+﻿using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Scrapper.Application.Exceptions;
 using Scrapper.Domain.Abstractions;
 
 namespace Scrapper.Infrastructure;
 
-public sealed class ApplicationDbContext : DbContext, IUnitOfWork
+public sealed class ApplicationDbContext : DbContext, IUnitOfWork, IDataProtectionKeyContext
 {
-    //private static readonly JsonSerializerSettings JsonSerializerSettings = new()
-    //{
-    //    TypeNameHandling = TypeNameHandling.All
-    //};
-
-    private readonly IDateTimeProvider _dateTimeProvider;
-
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
 
@@ -37,4 +30,6 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
             throw new ConcurrencyException("Concurrency exception occurred.", ex);
         }
     }
+
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 }
