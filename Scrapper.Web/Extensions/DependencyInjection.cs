@@ -16,6 +16,7 @@ public static class DependencyInjection
 
         services.ConfigureDataProtection();
         services.ConfigureSession();
+        //services.ConfigureCookies(); // Disable for IIS testing
         services.ConfigureAuthentication();
         services.ConfigureDependencies();
     }
@@ -41,26 +42,30 @@ public static class DependencyInjection
         });
     }
 
-    private static void ConfigureAuthentication(this IServiceCollection services)
+    // ReSharper disable once UnusedMember.Local
+    private static void ConfigureCookies(this IServiceCollection services)
     {
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.Cookie.SameSite = SameSiteMode.Lax;
-
-                options.Cookie.Name = "Scrapper.Web.AuthCookieAspNetCore";
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Home/Logout";
-            });
-
         services.Configure<CookiePolicyOptions>(options =>
         {
             options.MinimumSameSitePolicy = SameSiteMode.Strict;
             options.HttpOnly = HttpOnlyPolicy.None;
             options.Secure = CookieSecurePolicy.Always;
         });
+    }
+
+    private static void ConfigureAuthentication(this IServiceCollection services)
+    {
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                //options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Disable for IIS testing
+                options.Cookie.SameSite = SameSiteMode.Lax;
+
+                options.Cookie.Name = ".Scrapper.AuthCookieAspNetCore";
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+            });
     }
 
     private static void ConfigureDependencies(this IServiceCollection services)

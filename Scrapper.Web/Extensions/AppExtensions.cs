@@ -13,7 +13,7 @@ public static class AppExtensions
         else
         {
             app.UseExceptionHandler("/Error/500");
-            app.UseHsts();
+            //app.UseHsts(); // Disable for IIS testing
         }
 
         app.Use(async (context, next) =>
@@ -28,7 +28,7 @@ public static class AppExtensions
 
         app.UseRequestLocalization("en-US");
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection(); // Disable for IIS testing
         app.UseStaticFiles();
 
         app.UseSerilogRequestLogging();
@@ -40,6 +40,7 @@ public static class AppExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
+        app.MapControllers(); // For attribute routing
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");

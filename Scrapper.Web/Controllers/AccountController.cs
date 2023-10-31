@@ -35,6 +35,8 @@ namespace Scrapper.Web.Controllers
         {
             try
             {
+                _logService.LogInformation("Signing up new user with email '{Email}'.", loginModel.Email);
+
                 //create the user
                 await _fbAuth.CreateUserWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
 
@@ -72,6 +74,8 @@ namespace Scrapper.Web.Controllers
         {
             try
             {
+                _logService.LogInformation("Signing in user with email '{Email}'.", loginModel.Email);
+
                 //log in an existing user
                 var fbAuthLink = await _fbAuth
                     .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
@@ -92,9 +96,13 @@ namespace Scrapper.Web.Controllers
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
 
+                    _logService.LogInformation("Saving user token in session for email '{Email}'.", loginModel.Email);
+
                     HttpContext.Session.SetString("_UserToken", token);
                     return RedirectToAction("Index", "Home");
                 }
+
+                _logService.LogWarning("User with email '{Email}' not found.", loginModel.Email);
             }
             catch (FirebaseAuthException ex)
             {

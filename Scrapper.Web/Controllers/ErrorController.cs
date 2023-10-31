@@ -5,6 +5,7 @@ namespace Scrapper.Web.Controllers
 {
     [AllowAnonymous]
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [Route("Error")]
     public class ErrorController : Controller
     {
         // Best solution - https://stackoverflow.com/a/30072933
